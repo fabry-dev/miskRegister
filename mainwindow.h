@@ -52,6 +52,8 @@ private:
     QPixmap bgPix;
     QFont font;
     std::vector<lineEdit2 *>les;
+    std::vector<QRegularExpression> exprs;
+    lineEdit2* activeLine;
     keyboard *k;
     void insertUser(QString name,QString email,QString phone,QString achievement);
     void createTable();
@@ -64,6 +66,7 @@ protected:
 private slots:
     void assignLine();
     void checkResults();
+    void censure(QString txt);
 
 };
 

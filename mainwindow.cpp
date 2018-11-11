@@ -37,16 +37,21 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
     }
 
     les[0]->move(150,175);
+    exprs.push_back(QRegularExpression(""));
     les[1]->move(150,495);
+    exprs.push_back(QRegularExpression("^[0-9a-zA-Z]+([0-9a-zA-Z]*[-._+])*[0-9a-zA-Z]+@[0-9a-zA-Z]+([-.][0-9a-zA-Z]+)*([0-9a-zA-Z]*[.])[a-zA-Z]{2,6}$"));
     les[2]->move(150,820);
+    exprs.push_back(QRegularExpression("^[0-9]{2,12}$"));
     les[3]->move(150,1155);
+    exprs.push_back(QRegularExpression(""));
 
 
     k = new keyboard(this,PATH);
     k->move(0,height()-k->height());
     k->show();
-    connect(k,SIGNAL(nuTxt(QString)),les[0],SLOT(setText(QString)));
 
+    activeLine = les[0];
+    connect(k,SIGNAL(nuTxt(QString)),this,SLOT(censure(QString)));
 
     picButton *go = new picButton(this,0,PATH+"submit.png",PATH+"submit2"
                                                                 ".png","");
@@ -58,6 +63,39 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
 
 }
 
+
+
+void mainWindow::censure(QString txt)
+{
+    int  lineNb = 0;
+    for(int i = 0;i<les.size();i++)
+    {
+        if(les[i]==activeLine)
+        {
+
+           lineNb = i;
+           break;
+
+        }
+
+    }
+
+
+    QRegularExpressionMatch match = exprs[lineNb].match(txt, 0, QRegularExpression::PartialPreferCompleteMatch);
+
+
+    if( ((match.hasPartialMatch())||(match.hasMatch())))
+    {
+
+        activeLine->setText(txt);
+    }
+    else
+        k->reset(activeLine->text());
+
+
+
+
+}
 
 
 
@@ -105,12 +143,13 @@ void mainWindow::createTable()
 void mainWindow::assignLine()
 {
 
-    lineEdit2* line = (lineEdit2*)sender();
-    disconnect(k,0,0,0);
-
-    connect(k,SIGNAL(nuTxt(QString)),line,SLOT(setText(QString)));
-    k->reset(line->text());
+    activeLine = (lineEdit2*)sender();
+    k->reset(activeLine->text());
 }
+
+
+
+
 
 
 void mainWindow::checkResults()

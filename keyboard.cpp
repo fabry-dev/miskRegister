@@ -141,7 +141,11 @@ void keyboard::getKey(QString c)
     else if(c=="ESPACE")
     {
 
-
+        if(buf.size()<MAX_SIZE)
+        {
+            buf.append(" ");
+            emit nuTxt(buf);
+        }
     }
 
     else
