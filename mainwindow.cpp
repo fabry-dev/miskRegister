@@ -231,7 +231,7 @@ void mainWindow::initDb()
     //createTable();
     createTable();
 
-    getUsers();
+   // getUsers();
 }
 
 void mainWindow::createTable()
