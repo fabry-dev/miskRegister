@@ -131,7 +131,7 @@ void mainWindow::censure(QString txt)
         QRegularExpressionMatch match = exprs[lineNb].match(txt, 0, QRegularExpression::PartialPreferCompleteMatch);
 
 
-        if( ((match.hasPartialMatch())||(match.hasMatch())))
+        if( ((match.hasPartialMatch())||(match.hasMatch())||(txt=="")))
         {
 
             activeLine->setText(txt);
