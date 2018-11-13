@@ -60,11 +60,11 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
     te->setFont(font);
 
     rb1 = new QRadioButton(this);
-    rb1->move(1350,180);
-    rb1->setStyleSheet("QRadioButton::indicator { width: 30px; height: 30px;};");
+    rb1->move(1330,168);
+
     rb1->show();
     rb2 = new QRadioButton(this);
-    rb2->move(1530,180);
+    rb2->move(1520,168);
     rb2->show();
 
     rb1->setStyleSheet("    QRadioButton{width:50;}");
@@ -72,7 +72,10 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
     connect(rb2,SIGNAL(clicked(bool)),this,SLOT(getRb2()));
 
     rb1->toggle();
-
+    rb1->setStyleSheet("QRadioButton::indicator { width: 35px; height: 35px;}");
+    rb1->adjustSize();
+    rb2->setStyleSheet("QRadioButton::indicator { width: 35px; height: 35px;}");
+    rb2->adjustSize();
     k = new keyboard(this,PATH);
     k->move((width()-k->width())/2,height()-k->height());
     k->show();
