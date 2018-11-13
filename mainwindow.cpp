@@ -114,6 +114,13 @@ void mainWindow::restartTimer()
 
 void mainWindow::reset()
 {
+    for(auto l:les)
+    {
+        l->setText("");
+    }
+    te->setText("");
+
+
     setPixmap(initPix);
     k->hide();
     rb1->hide();
