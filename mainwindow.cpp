@@ -17,6 +17,9 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
     thankyouPix.load(PATH+"thankyou.png");
       initPix.load(PATH+"start.png");
 
+      timer=new QTimer(this);
+      connect(timer,SIGNAL(timeout()),this,SLOT(reset()));
+
     initDb();
 
     int id = QFontDatabase::addApplicationFont(PATH+"police.otf");
@@ -99,6 +102,16 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
 }
 
 
+
+void mainWindow::restartTimer()
+{
+
+    timer->start(10*1000);
+}
+
+
+
+
 void mainWindow::reset()
 {
     setPixmap(initPix);
@@ -110,6 +123,7 @@ void mainWindow::reset()
     for (auto le:les)
         le->hide();
     start->show();
+
 
 }
 void mainWindow::goMenu()
@@ -123,6 +137,7 @@ void mainWindow::goMenu()
     for (auto le:les)
         le->show();
     start->hide();
+    timer->start(10*1000);
 }
 
 
@@ -134,11 +149,13 @@ void mainWindow::getRb1()
 
     rb1->setChecked(rb2->isChecked());
     les[4]->setDisabled(false);
+    timer->start(10*1000);
 
 }
 
 void mainWindow::getRb2()
 {
+    timer->start(10*1000);
     rb2->setChecked(rb1->isChecked());
     les[4]->setText("");
     les[4]->setDisabled(true);
@@ -151,7 +168,7 @@ void mainWindow::getRb2()
 void mainWindow::censure(QString txt)
 {
     int  lineNb = 0;
-
+    timer->start(10*1000);
 
     if(activeLine!=NULL)
     {
@@ -285,6 +302,7 @@ void mainWindow::checkResults()
     for (auto le:les)
         le->hide();
     QTimer::singleShot(3000,this,SLOT(reset()));
+    timer->stop();
 
 }
 

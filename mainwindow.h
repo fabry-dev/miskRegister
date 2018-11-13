@@ -80,6 +80,8 @@ private:
     void getUsers();
     QRadioButton *rb1,*rb2;
      picButton *go,*start;
+     QTimer *timer;
+     void restartTimer();
 protected:
     void mousePressEvent(QMouseEvent *ev);
 
