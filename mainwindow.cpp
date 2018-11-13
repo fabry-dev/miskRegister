@@ -15,8 +15,7 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
     resize(1920,1080);
     bgPix.load(PATH+"background.png");
     thankyouPix.load(PATH+"thankyou.png");
-    setPixmap(bgPix);
-
+      initPix.load(PATH+"start.png");
 
     initDb();
 
@@ -86,15 +85,34 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
 
     go = new picButton(this,0,PATH+"SEND.png",PATH+"SEND2.png","");
     connect(go,SIGNAL(clicked(QString)),this,SLOT(checkResults()));
-    go->show();
+
     go->move(1650,980);
 
+    start = new picButton(this,0,PATH+"go.png",PATH+"go2.png","");
+    connect(start,SIGNAL(clicked(QString)),this,SLOT(goMenu()));
 
+    start->move((width()-start->width())/2,800);
+
+
+    reset();
 
 }
 
 
 void mainWindow::reset()
+{
+    setPixmap(initPix);
+    k->hide();
+    rb1->hide();
+    rb2->hide();
+    te->hide();
+    go->hide();
+    for (auto le:les)
+        le->hide();
+    start->show();
+
+}
+void mainWindow::goMenu()
 {
     setPixmap(bgPix);
     k->show();
@@ -104,7 +122,7 @@ void mainWindow::reset()
     go->show();
     for (auto le:les)
         le->show();
-
+    start->hide();
 }
 
 
@@ -173,6 +191,9 @@ void mainWindow::censure(QString txt)
 
 
 
+
+
+
 void mainWindow::initDb()
 {
 
@@ -196,7 +217,6 @@ void mainWindow::initDb()
     getUsers();
 }
 
-
 void mainWindow::createTable()
 {
 
@@ -213,7 +233,6 @@ void mainWindow::createTable()
 }
 
 
-
 void mainWindow::assignLine()
 {
 
@@ -228,9 +247,6 @@ void mainWindow::assignZone()
 
 
 }
-
-
-
 
 void mainWindow::checkResults()
 {
