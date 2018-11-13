@@ -67,7 +67,7 @@ public:
     explicit mainWindow(QWidget *parent = nullptr,QString PATH="");
 private:
     QString PATH;
-    QPixmap bgPix;
+    QPixmap bgPix,thankyouPix;
     QFont font;
     textEdit2 *te;
     std::vector<lineEdit2 *>les;
@@ -79,6 +79,7 @@ private:
     void initDb();
     void getUsers();
     QRadioButton *rb1,*rb2;
+     picButton *go;
 protected:
     void mousePressEvent(QMouseEvent *ev);
 
@@ -90,6 +91,7 @@ private slots:
     void assignZone();
     void getRb1(void);
     void getRb2(void);
+    void reset();
 
 };
 

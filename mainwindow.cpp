@@ -14,6 +14,7 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
     showFullScreen();
     resize(1920,1080);
     bgPix.load(PATH+"background.png");
+    thankyouPix.load(PATH+"thankyou.png");
     setPixmap(bgPix);
 
 
@@ -60,6 +61,7 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
 
     rb1 = new QRadioButton(this);
     rb1->move(1350,180);
+    rb1->setStyleSheet("QRadioButton::indicator { width: 30px; height: 30px;};");
     rb1->show();
     rb2 = new QRadioButton(this);
     rb2->move(1530,180);
@@ -79,7 +81,7 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
     activeLine = les[0];
     connect(k,SIGNAL(nuTxt(QString)),this,SLOT(censure(QString)));
 
-    picButton *go = new picButton(this,0,PATH+"SEND.png",PATH+"SEND2.png","");
+    go = new picButton(this,0,PATH+"SEND.png",PATH+"SEND2.png","");
     connect(go,SIGNAL(clicked(QString)),this,SLOT(checkResults()));
     go->show();
     go->move(1650,980);
@@ -89,21 +91,38 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
 }
 
 
+void mainWindow::reset()
+{
+    setPixmap(bgPix);
+    k->show();
+    rb1->show();
+    rb2->show();
+    te->show();
+    go->show();
+    for (auto le:les)
+        le->show();
+
+}
+
+
+
+
+
 void mainWindow::getRb1()
 {
 
     rb1->setChecked(rb2->isChecked());
-les[4]->setDisabled(false);
+    les[4]->setDisabled(false);
 
 }
 
 void mainWindow::getRb2()
 {
     rb2->setChecked(rb1->isChecked());
-        les[4]->setText("");
-        les[4]->setDisabled(true);
-        activeLine=les[3];
-        k->reset(activeLine->text());
+    les[4]->setText("");
+    les[4]->setDisabled(true);
+    activeLine=les[3];
+    k->reset(activeLine->text());
 }
 
 
@@ -142,8 +161,8 @@ void mainWindow::censure(QString txt)
     }
     else
     {
-       te->setText(txt);
-    te->moveCursor ( QTextCursor::End );
+        te->setText(txt);
+        te->moveCursor ( QTextCursor::End );
     }
 
 
@@ -228,7 +247,7 @@ void mainWindow::checkResults()
 
     country = les[3]->text();
     fullName = les[4]->text();
- achievement = te->toPlainText();
+    achievement = te->toPlainText();
 
     for(auto l:les)
     {
@@ -237,6 +256,16 @@ void mainWindow::checkResults()
     te->setText("");
 
     insertUser(name,email,phone,achievement,fullName,country);
+
+    setPixmap(thankyouPix);
+    k->hide();
+    rb1->hide();
+    rb2->hide();
+    te->hide();
+    go->hide();
+    for (auto le:les)
+        le->hide();
+    QTimer::singleShot(3000,this,SLOT(reset()));
 
 }
 
