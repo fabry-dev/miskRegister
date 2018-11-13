@@ -69,9 +69,9 @@ int main(int argc, char *argv[])
 
 
 
-    QScreen* screen1 = a.screens().at(0);
+    QScreen* screen1 = a.screens().at(1);
     mainWindow *mw = new mainWindow(NULL,PATH);
-    mw->setGeometry(screen1->geometry().x(),screen1->geometry().y(),1080,1920);
+    mw->setGeometry(screen1->geometry().x(),screen1->geometry().y(),1920,1080);
 
 
     return a.exec();

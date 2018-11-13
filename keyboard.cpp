@@ -2,7 +2,7 @@
 
 QStringList keysStr = (QStringList)"0"<<"1"<<"2"<<"3"<<"4"<<"5"<<"6"<<"7"<<"8"<<"9"<<""
                                      <<"Q"<<"W"<<"E"<<"R"<<"T"<<"Y"<<"U"<<"I"<<"O"<<"P"<<"DELL"
-                                    <<"A"<<"S"<<"D"<<"F"<<"G"<<"H"<<"J"<<"K"<<"L"<<"Enter"<<""
+                                    <<"A"<<"S"<<"D"<<"F"<<"G"<<"H"<<"J"<<"K"<<"L"<<"ENTER"<<""
                                    <<"Z"<<"X"<<"C"<<"V"<<"B"<<"N"<<"M"<<"POINT"<<"@"<<""<<""
                                   <<"-"<<"_"<<"ESPACE"<<"_"<<"-";
 
@@ -70,7 +70,7 @@ void keyboard::generateKeyboard()
         }
 
 
-        if(keysStr[i]=="Enter")
+        if(keysStr[i]=="ENTER")
         {
             w = 100;
         }
@@ -125,8 +125,9 @@ void keyboard::getKey(QString c)
         }
 
     }
-    else if(c=="Enter")
+    else if(c=="ENTER")
     {
+        buf.append("\n");
 
     }
     else if(c=="POINT")
