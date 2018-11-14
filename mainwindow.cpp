@@ -106,7 +106,7 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
 void mainWindow::restartTimer()
 {
 
-    timer->start(30*1000);
+    timer->start(20*1000);
 }
 
 
