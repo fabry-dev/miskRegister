@@ -112,7 +112,7 @@ void keyboard::reset(QString nubuf)
 
 
 
-#define MAX_SIZE 30
+
 
 void keyboard::getKey(QString c)
 {
@@ -132,30 +132,27 @@ void keyboard::getKey(QString c)
     }
     else if(c=="POINT")
     {
-        if(buf.size()<MAX_SIZE)
-        {
+
             buf.append(".");
             emit nuTxt(buf);
-        }
+
 
     }
     else if(c=="ESPACE")
     {
 
-        if(buf.size()<MAX_SIZE)
-        {
+
             buf.append(" ");
             emit nuTxt(buf);
-        }
+
     }
 
     else
     {
-        if(buf.size()<MAX_SIZE)
-        {
+
             buf.append(c.toLower());
             emit nuTxt(buf);
-        }
+
 
     }
 }

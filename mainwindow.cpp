@@ -106,7 +106,7 @@ mainWindow::mainWindow(QWidget *parent, QString PATH) : QLabel(parent),PATH(PATH
 void mainWindow::restartTimer()
 {
 
-    timer->start(10*1000);
+    timer->start(30*1000);
 }
 
 
@@ -144,7 +144,7 @@ void mainWindow::goMenu()
     for (auto le:les)
         le->show();
     start->hide();
-    timer->start(10*1000);
+   restartTimer();
 }
 
 
@@ -156,13 +156,13 @@ void mainWindow::getRb1()
 
     rb1->setChecked(rb2->isChecked());
     les[4]->setDisabled(false);
-    timer->start(10*1000);
+restartTimer();
 
 }
 
 void mainWindow::getRb2()
 {
-    timer->start(10*1000);
+    restartTimer();
     rb2->setChecked(rb1->isChecked());
     les[4]->setText("");
     les[4]->setDisabled(true);
@@ -175,7 +175,7 @@ void mainWindow::getRb2()
 void mainWindow::censure(QString txt)
 {
     int  lineNb = 0;
-    timer->start(10*1000);
+    restartTimer();
 
     if(activeLine!=NULL)
     {
