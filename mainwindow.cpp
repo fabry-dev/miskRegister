@@ -123,6 +123,7 @@ void mainWindow::reset()
 
     setPixmap(initPix);
     k->hide();
+    k->reset("");
     rb1->hide();
     rb2->hide();
     te->hide();
